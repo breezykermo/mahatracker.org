@@ -66,18 +66,24 @@ for my $e (@$d) {
       err("$id: not policy, but carries '$f'") if defined $e->{$f};
     }
   }
-  # sources should be {label,url} or a plain string, never half of one
+  # Every source is {label, url}. An empty url means a publication we can name
+  # but not link; the page renders that as plain text. A bare string is the old
+  # shape, which the renderer no longer handles.
   for my $s (@{ $e->{sources} || [] }) {
-    next unless ref $s eq 'HASH';
-    err("$id: a source has a url but no label") if $s->{url} && !$s->{label};
-    err("$id: a source has a label but no url") if $s->{label} && !$s->{url};
+    if (ref $s ne 'HASH') {
+      err("$id: source is a bare string, should be {label, url}: $s");
+      next;
+    }
+    err("$id: a source has no label")   if ($s->{label} // '') eq '';
+    err("$id: a source has no url key") unless exists $s->{url};
   }
   warn_("$id: no link and no sources") unless ($e->{link}//'') ne '' || @{ $e->{sources} || [] };
 
-  # A source named as a plain string carries no url, so it renders as text a
-  # reader cannot follow. Tolerable when the entry has a `link` to go to;
-  # a dead end when it has not, which is what this check surfaces.
-  my @named = grep { ref $_ ne 'HASH' } @{ $e->{sources} || [] };
+  # A source with an empty url renders as text a reader cannot follow.
+  # Tolerable when the entry has a `link` to go to; a dead end when it has
+  # not, which is what this check surfaces.
+  my @named = map { $_->{label} }
+              grep { ref $_ eq 'HASH' && ($_->{url} // '') eq '' } @{ $e->{sources} || [] };
   $unlinked += @named;
   $unlinked_entries++ if @named;
   if (@named && ($e->{link} // '') eq '') {
@@ -92,11 +98,12 @@ for my $k (sort keys %by_norm) {
   warn_("possible duplicate: " . join(", ", @ids) . " share a title opening") if @ids > 1;
 }
 
-# sorted newest first, which the page relies on
+# Newest first. index.html now sorts after fetch, so file order no longer
+# decides what a reader sees; this keeps the file readable in a diff.
 my $prev;
 for my $e (@$d) {
   my $dt = $e->{date} // '';
-  err(($e->{id}//'?') . ": out of order, $dt follows $prev") if defined $prev && $dt gt $prev;
+  warn_(($e->{id}//'?') . ": out of file order, $dt follows $prev") if defined $prev && $dt gt $prev;
   $prev = $dt;
 }
 

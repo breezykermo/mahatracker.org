@@ -2,26 +2,21 @@
 # https://pagescms.org
 #
 # This describes entries.json to the CMS so collaborators get a form per record
-# instead of hand-editing JSON. It is a DRAFT: see the three notes below before
-# pointing the hosted CMS at this repository.
+# instead of hand-editing JSON.
 #
-# NOTE 1 - record order. index.html renders entries in file order and does not
-#   sort them, and validate.pl treats the file as newest-first. Pages CMS has no
-#   documented control over where a new record is written. Before relying on the
-#   CMS, either confirm it preserves order (add a test record, check the diff)
-#   or have index.html sort after fetch, which makes file order cosmetic.
+# Record order is safe: index.html sorts after fetch, so wherever the CMS writes
+# a new record, the page still shows it in the right place.
 #
-# NOTE 2 - the `sources` field. 23 entries currently hold bare strings, such as
-#   "USRTK", alongside the {label, url} objects declared below. Pages CMS has no
-#   documented mixed string-or-object list, so those 23 may be dropped or
-#   mangled on save. Normalise them before enabling the CMS.
+# The `sources` field is safe: every source is now {label, url}, with an empty
+# url where we can name a publication but not link it, so the repeatable-object
+# field below describes the data exactly.
 #
-# NOTE 3 - empty versus absent. Every record carries stance, state, stateCode
-#   and govParty, using "" where they do not apply, while enacted/actorD/actorR/
-#   bipartisan appear only on policy records, because validate.pl rejects them
-#   elsewhere. Pages CMS has no documented way to omit a key, so it may write
-#   these onto every record. Save one record through the CMS and run
-#   `perl validate.pl` before trusting it with the rest.
+# ONE THING LEFT TO CHECK - empty versus absent. Every record carries stance,
+# state, stateCode and govParty, using "" where they do not apply, while
+# enacted/actorD/actorR/bipartisan appear only on policy records, because
+# validate.pl rejects them elsewhere. Pages CMS has no documented way to omit
+# a key, so it may write these onto every record. Save one record through the
+# CMS, then run `perl validate.pl`, before trusting it with the rest.
 
 content:
   - name: entries
@@ -88,8 +83,7 @@ content:
           - name: url
             label: URL
             type: string
-            required: true
-        description: 'Both parts are needed. A publication named without a URL renders as dead text - see NOTE 2 at the top of this file.'
+        description: 'Leave the URL blank for a publication you can name but cannot link - it then renders as plain text rather than a link.'
 
       - name: category
         label: Category

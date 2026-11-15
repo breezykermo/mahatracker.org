@@ -373,7 +373,10 @@
       "level" : "movement",
       "link" : "https://www.abc.net.au/news/2026-10-13/make-america-healthy-again-trump-midterms/107244228",
       "sources" : [
-         "ABC News (Australia)"
+         {
+            "label" : "ABC News (Australia)",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -396,9 +399,18 @@
       "level" : "state",
       "link" : "https://oehha.ca.gov/proposition-65/crnr/notice-intent-list-chemicals-labor-code-mechanism-atrazine",
       "sources" : [
-         "OEHHA notice",
-         "OEHHA notice (PDF)",
-         "The New Lede"
+         {
+            "label" : "OEHHA notice",
+            "url" : ""
+         },
+         {
+            "label" : "OEHHA notice (PDF)",
+            "url" : ""
+         },
+         {
+            "label" : "The New Lede",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "California",
@@ -422,7 +434,10 @@
       "level" : "movement",
       "link" : "https://www.statnews.com/2026/10/07/democrats-focus-on-food-toxins-win-maha-voters-midterm-elections/",
       "sources" : [
-         "STAT"
+         {
+            "label" : "STAT",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -441,8 +456,14 @@
       "level" : "movement",
       "link" : "https://www.fastcompany.com/91619796/rfk-jr-embracing-ai-confusing-maha-allies-medical-experts",
       "sources" : [
-         "AP (via U.S. News)",
-         "Fast Company"
+         {
+            "label" : "AP (via U.S. News)",
+            "url" : ""
+         },
+         {
+            "label" : "Fast Company",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -461,7 +482,10 @@
       "level" : "federal",
       "link" : "https://www.gao.gov/products/gao-27-108853",
       "sources" : [
-         "GAO-27-108853"
+         {
+            "label" : "GAO-27-108853",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -485,10 +509,22 @@
       "level" : "movement",
       "link" : "https://www.washingtonexaminer.com/policy/healthcare/4745482/maha-activists-upset-corporate-sponsorship-summit-rfk-jr-vance/",
       "sources" : [
-         "The Hill",
-         "Yahoo News",
-         "Washington Examiner",
-         "MS NOW"
+         {
+            "label" : "The Hill",
+            "url" : ""
+         },
+         {
+            "label" : "Yahoo News",
+            "url" : ""
+         },
+         {
+            "label" : "Washington Examiner",
+            "url" : ""
+         },
+         {
+            "label" : "MS NOW",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -507,8 +543,14 @@
       "level" : "federal",
       "link" : "https://www.whitehouse.gov/presidential-actions/2026/09/eliminating-disease-carrying-pests-and-restoring-enjoyment-of-the-great-outdoors/",
       "sources" : [
-         "White House fact sheet",
-         "Federal Register"
+         {
+            "label" : "White House fact sheet",
+            "url" : ""
+         },
+         {
+            "label" : "Federal Register",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -529,8 +571,14 @@
       "level" : "movement",
       "link" : "https://www.claimsjournal.com/news/national/2026/09/30/340468.htm",
       "sources" : [
-         "Claims Journal (Reuters)",
-         "Global Agriculture"
+         {
+            "label" : "Claims Journal (Reuters)",
+            "url" : ""
+         },
+         {
+            "label" : "Global Agriculture",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -554,9 +602,18 @@
       "level" : "movement",
       "link" : "https://www.npr.org/2026/09/24/nx-s1-5979867/rfk-ethics-book-deals",
       "sources" : [
-         "New York Times (via Philadelphia Inquirer)",
-         "The Guardian (via inkl)",
-         "Genetic Literacy Project"
+         {
+            "label" : "New York Times (via Philadelphia Inquirer)",
+            "url" : ""
+         },
+         {
+            "label" : "The Guardian (via inkl)",
+            "url" : ""
+         },
+         {
+            "label" : "Genetic Literacy Project",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -575,8 +632,14 @@
       "level" : "federal",
       "link" : "https://www.epa.gov/newsreleases/epa-and-hhs-announce-new-scientific-partnership-strengthen-glyphosate-review",
       "sources" : [
-         "DTN",
-         "The MAHA Report"
+         {
+            "label" : "DTN",
+            "url" : ""
+         },
+         {
+            "label" : "The MAHA Report",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -597,8 +660,14 @@
       "level" : "federal",
       "link" : "https://www.cnn.com/2026/09/17/health/covid-vaccines-delayed-children",
       "sources" : [
-         "CNN",
-         "AP via KSAT"
+         {
+            "label" : "CNN",
+            "url" : ""
+         },
+         {
+            "label" : "AP via KSAT",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -620,8 +689,14 @@
       "level" : "movement",
       "link" : "https://www.bloomberg.com/news/articles/2026-09-18/rfk-jr-linked-group-offered-access-to-us-officials-for-payment",
       "sources" : [
-         "Bloomberg Law",
-         "MS NOW"
+         {
+            "label" : "Bloomberg Law",
+            "url" : ""
+         },
+         {
+            "label" : "MS NOW",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -640,9 +715,18 @@
       "level" : "movement",
       "link" : "https://www.usnews.com/news/top-news/articles/2026-09-14/bayers-monsanto-unit-urges-missouri-judge-to-approve-7-25-billion-roundup-settlement",
       "sources" : [
-         "Reuters via Investing.com",
-         "Yahoo Finance",
-         "Global Agriculture"
+         {
+            "label" : "Reuters via Investing.com",
+            "url" : ""
+         },
+         {
+            "label" : "Yahoo Finance",
+            "url" : ""
+         },
+         {
+            "label" : "Global Agriculture",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -713,8 +797,14 @@
       "level" : "federal",
       "link" : "https://www.thenewlede.org/2026/08/farm-bill-booker-pesticide-amendment-monsanto/",
       "sources" : [
-         "The New Lede",
-         "Organic Authority"
+         {
+            "label" : "The New Lede",
+            "url" : ""
+         },
+         {
+            "label" : "Organic Authority",
+            "url" : ""
+         }
       ],
       "stance" : "opposing",
       "state" : "",
@@ -736,10 +826,22 @@
       "level" : "state",
       "link" : "https://www.cdpr.ca.gov/2026/08/10/dpr-announces-voluntary-cancellation-of-all-pesticide-products-containing-paraquat-dichloride/",
       "sources" : [
-         "California DPR",
-         "Western Growers",
-         "Rep. Laura Friedman",
-         "The New Lede (via SEJ)"
+         {
+            "label" : "California DPR",
+            "url" : ""
+         },
+         {
+            "label" : "Western Growers",
+            "url" : ""
+         },
+         {
+            "label" : "Rep. Laura Friedman",
+            "url" : ""
+         },
+         {
+            "label" : "The New Lede (via SEJ)",
+            "url" : ""
+         }
       ],
       "stance" : "advancing",
       "state" : "California",
@@ -791,8 +893,14 @@
       "level" : "movement",
       "link" : "https://www.lawsuit-information-center.com/roundup-lawsuit.html",
       "sources" : [
-         "Lawsuit Information Center",
-         "Wikipedia: Monsanto v. Durnell"
+         {
+            "label" : "Lawsuit Information Center",
+            "url" : ""
+         },
+         {
+            "label" : "Wikipedia: Monsanto v. Durnell",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -815,8 +923,14 @@
       "level" : "federal",
       "link" : "https://www.nbcnews.com/health/health-news/people-may-risk-red-meat-allergy-caused-ticks-thought-rcna352712",
       "sources" : [
-         "NBC News",
-         "Roll Call"
+         {
+            "label" : "NBC News",
+            "url" : ""
+         },
+         {
+            "label" : "Roll Call",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -862,8 +976,14 @@
       "level" : "federal",
       "link" : "https://www.epa.gov/newsreleases/epa-host-roundtable-paraquat-summer",
       "sources" : [
-         "EPA",
-         "The New Lede"
+         {
+            "label" : "EPA",
+            "url" : ""
+         },
+         {
+            "label" : "The New Lede",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -886,8 +1006,14 @@
       "level" : "federal",
       "link" : "https://www.booker.senate.gov/news/press/booker-introduces-pesticide-injury-accountability-act",
       "sources" : [
-         "Jersey Vindicator",
-         "The New Lede"
+         {
+            "label" : "Jersey Vindicator",
+            "url" : ""
+         },
+         {
+            "label" : "The New Lede",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -908,10 +1034,22 @@
       "level" : "federal",
       "link" : "https://www.law.cornell.edu/supremecourt/text/24-1068",
       "sources" : [
-         "Supreme Court opinion",
-         "The Hill",
-         "Bloomberg",
-         "Insurance Journal (Bloomberg)"
+         {
+            "label" : "Supreme Court opinion",
+            "url" : ""
+         },
+         {
+            "label" : "The Hill",
+            "url" : ""
+         },
+         {
+            "label" : "Bloomberg",
+            "url" : ""
+         },
+         {
+            "label" : "Insurance Journal (Bloomberg)",
+            "url" : ""
+         }
       ],
       "stance" : "opposing",
       "state" : "",
@@ -933,10 +1071,22 @@
       "level" : "movement",
       "link" : "https://thehill.com/policy/healthcare/5943361-activists-maha-supreme-court-monsanto/",
       "sources" : [
-         "NBC News",
-         "NOTUS",
-         "The Hill",
-         "Daily Signal"
+         {
+            "label" : "NBC News",
+            "url" : ""
+         },
+         {
+            "label" : "NOTUS",
+            "url" : ""
+         },
+         {
+            "label" : "The Hill",
+            "url" : ""
+         },
+         {
+            "label" : "Daily Signal",
+            "url" : ""
+         }
       ],
       "stance" : "",
       "state" : "",
@@ -2442,8 +2592,14 @@
       "level" : "federal",
       "link" : "https://www.gao.gov/products/gao-27-108853",
       "sources" : [
-         "GAO-27-108853",
-         "State Health and Value Strategies"
+         {
+            "label" : "GAO-27-108853",
+            "url" : ""
+         },
+         {
+            "label" : "State Health and Value Strategies",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",
@@ -2590,9 +2746,18 @@
       "level" : "federal",
       "link" : "https://bipartisanpolicy.org/report/federal-policy-priorities-to-strengthen-rural-health-and-maximize-rural-health-transformation-program-investments/",
       "sources" : [
-         "GAO-27-108853",
-         "Bipartisan Policy Center",
-         "The New Republic"
+         {
+            "label" : "GAO-27-108853",
+            "url" : ""
+         },
+         {
+            "label" : "Bipartisan Policy Center",
+            "url" : ""
+         },
+         {
+            "label" : "The New Republic",
+            "url" : ""
+         }
       ],
       "stance" : "neutral",
       "state" : "",

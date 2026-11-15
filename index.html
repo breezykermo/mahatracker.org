@@ -1766,7 +1766,7 @@
                    ? '<p class="ix-sources"><span>Sources</span> ' + e.sources.map(function (s) {
                        return (s && s.url)
                          ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label || 'Source') + '</a>'
-                         : esc(s);
+                         : esc(s && s.label ? s.label : s);
                      }).join(' · ') + '</p>' : '') +
                  (e.link ? '<a class="ix-src" href="' + esc(e.link) + '" target="_blank" rel="noopener">Source ↗</a>' : '') +
                '</div>' +
@@ -1956,6 +1956,12 @@
       return r.json();
     })
     .then(function (data) {
+      // Sort here rather than trusting the file, so an entry added by hand
+      // or by a CMS cannot surface in the wrong year. Array.sort is stable,
+      // so entries sharing a date keep the order the file gives them.
+      if (Array.isArray(data)) {
+        data.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+      }
       policyIx.load(data);
       movementIx.load(data);
       if (window.MT && window.MT.buildScorecard) window.MT.buildScorecard(data);
