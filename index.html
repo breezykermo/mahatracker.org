@@ -1844,10 +1844,13 @@
                    '<span class="ix-n">' + counts[k] + '</span>' +
                  '</button>';
         }).join('');
-        /* A facet with nothing in it is noise. The movement half has no
-           positions on health at all, so that group simply does not appear. */
+        /* A facet that cannot narrow anything is noise, so it does not appear:
+           the movement half has no positions on health at all, and on the
+           policy half every record is a policy, so Record type offers the one
+           option. Hiding rather than deleting means either group returns on
+           its own if the data ever gives it a second option. */
         var grp = box.closest('.ix-group');
-        if (grp) grp.hidden = !keys.length;
+        if (grp) grp.hidden = keys.length < 2;
       });
 
       if (opts.state) {
