@@ -393,7 +393,7 @@
          },
          {
             "label" : "OEHHA notice (PDF)",
-            "url" : ""
+            "url" : "https://oehha.ca.gov/sites/default/files/media/2026-10/NOIL_LCAtrazine100926.pdf"
          },
          {
             "label" : "The New Lede",
@@ -469,10 +469,6 @@
       "sources" : [
          {
             "label" : "GAO-27-108853",
-            "url" : ""
-         },
-         {
-            "label" : "GAO-27-108853",
             "url" : "https://www.gao.gov/products/gao-27-108853"
          }
       ],
@@ -536,7 +532,7 @@
          },
          {
             "label" : "Federal Register",
-            "url" : ""
+            "url" : "https://www.federalregister.gov/documents/2026/10/02/2026-20320/eliminating-disease-carrying-pests-and-restoring-enjoyment-of-the-great-outdoors"
          }
       ],
       "stance" : "neutral",
@@ -589,7 +585,7 @@
       "sources" : [
          {
             "label" : "New York Times (via Philadelphia Inquirer)",
-            "url" : ""
+            "url" : "https://www.inquirer.com/news/nation-world/kennedy-maha-book-advances-ethics-20260923.html"
          },
          {
             "label" : "The Guardian (via inkl)",
@@ -622,7 +618,7 @@
       "sources" : [
          {
             "label" : "DTN",
-            "url" : ""
+            "url" : "https://www.dtnpf.com/agriculture/web/AG/crops/article/2026/09/23/epa-hhs-reach-agreement-expand-risks"
          },
          {
             "label" : "The MAHA Report",
@@ -681,7 +677,7 @@
       "sources" : [
          {
             "label" : "Bloomberg Law",
-            "url" : ""
+            "url" : "https://news.bloomberglaw.com/health-law-and-business/rfk-jr-linked-group-offered-access-to-us-officials-for-payment"
          },
          {
             "label" : "MS NOW",
@@ -798,7 +794,7 @@
          },
          {
             "label" : "Organic Authority",
-            "url" : ""
+            "url" : "https://www.organicauthority.com/buzz-news/farm-bill-amendment"
          }
       ],
       "stance" : "opposing",
@@ -830,7 +826,7 @@
          },
          {
             "label" : "Rep. Laura Friedman",
-            "url" : ""
+            "url" : "https://friedman.house.gov/media/press-releases/release-rep-friedman-celebrates-official-phase-out-paraquat-after-leading"
          },
          {
             "label" : "The New Lede (via SEJ)",
@@ -891,7 +887,7 @@
          },
          {
             "label" : "Wikipedia: Monsanto v. Durnell",
-            "url" : ""
+            "url" : "https://en.wikipedia.org/wiki/Monsanto_v._Durnell"
          }
       ],
       "stance" : "",
@@ -920,7 +916,7 @@
          },
          {
             "label" : "Roll Call",
-            "url" : ""
+            "url" : "https://rollcall.com/2026/07/22/tick-bites-snag-congress-attention-as-red-meat-allergies-rise/"
          }
       ],
       "stance" : "",
@@ -971,7 +967,7 @@
          },
          {
             "label" : "The New Lede",
-            "url" : ""
+            "url" : "https://www.thenewlede.org/2026/06/epa-to-hold-roundtable-on-paraquat/"
          }
       ],
       "stance" : "neutral",
@@ -1000,7 +996,7 @@
          },
          {
             "label" : "The New Lede",
-            "url" : ""
+            "url" : "https://www.thenewlede.org/2025/07/pesticide-injury-lawsuits-federal-bill/"
          },
          {
             "label" : "Sen. Cory Booker",
@@ -1067,7 +1063,7 @@
          },
          {
             "label" : "NOTUS",
-            "url" : ""
+            "url" : "https://www.notus.org/courts/supreme-court-monsanto-maha-loss-pesticides"
          },
          {
             "label" : "The Hill",
@@ -2841,10 +2837,6 @@
       "level" : "federal",
       "sources" : [
          {
-            "label" : "GAO-27-108853",
-            "url" : ""
-         },
-         {
             "label" : "State Health and Value Strategies",
             "url" : ""
          },
@@ -3029,7 +3021,7 @@
       "sources" : [
          {
             "label" : "GAO-27-108853",
-            "url" : ""
+            "url" : "https://www.gao.gov/products/gao-27-108853"
          },
          {
             "label" : "Bipartisan Policy Center",
