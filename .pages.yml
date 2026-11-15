@@ -66,11 +66,6 @@ content:
         required: true
         description: 'Plain prose. Raw HTML is allowed and will render - this is how the video embeds work - so do not paste formatted text from a word processor.'
 
-      - name: link
-        label: Primary link
-        type: string
-        description: 'The single URL the title points to. Further reading goes in Sources.'
-
       - name: sources
         label: Sources
         type: object
@@ -83,7 +78,7 @@ content:
           - name: url
             label: URL
             type: string
-        description: 'Leave the URL blank for a publication you can name but cannot link - it then renders as plain text rather than a link.'
+        description: 'Every source the entry draws on, each one a link. Leave the URL blank only for something you can name but genuinely cannot link; it then renders as plain text.'
 
       - name: category
         label: Category

@@ -77,18 +77,15 @@ for my $e (@$d) {
     err("$id: a source has no label")   if ($s->{label} // '') eq '';
     err("$id: a source has no url key") unless exists $s->{url};
   }
-  warn_("$id: no link and no sources") unless ($e->{link}//'') ne '' || @{ $e->{sources} || [] };
+  warn_("$id: no sources") unless @{ $e->{sources} || [] };
 
-  # A source with an empty url renders as text a reader cannot follow.
-  # Tolerable when the entry has a `link` to go to; a dead end when it has
-  # not, which is what this check surfaces.
+  # A source with an empty url renders as text a reader cannot follow. Every
+  # source should be a link; these are the ones still needing a url looked up.
   my @named = map { $_->{label} }
               grep { ref $_ eq 'HASH' && ($_->{url} // '') eq '' } @{ $e->{sources} || [] };
   $unlinked += @named;
   $unlinked_entries++ if @named;
-  if (@named && ($e->{link} // '') eq '') {
-    warn_("$id: sources named but unreachable, and no link: " . join(", ", @named));
-  }
+  warn_("$id: source named but not linked: " . join(", ", @named)) if @named;
   push @{ $by_norm{ norm(substr($e->{title}//'', 0, 46)) } }, $id;
 }
 

@@ -910,10 +910,6 @@
     .ix-body p, .ix-desc { font-family: 'Source Serif 4', serif; font-size: .95rem; line-height: 1.68; color: var(--text-dark); margin: 0 0 12px; }
     .ix-desc a { color: var(--teal-dark); }
     .ix-desc iframe { display: block; border: 0; }
-    .ix-src { font-family: 'DM Mono', monospace; font-size: .72rem; color: var(--teal-dark); text-decoration: none;
-      border-bottom: 1px solid currentColor; }
-    .ix-src:hover { color: var(--forest); }
-    .ix-src:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 2px; }
 
     .ix-sources { font-family: 'DM Mono', monospace; font-size: .7rem; line-height: 1.6; color: var(--text-mid); margin: 10px 0 0; }
     .ix-sources span { text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--forest-light); margin-right: 6px; }
@@ -1768,7 +1764,6 @@
                          ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label || 'Source') + '</a>'
                          : esc(s && s.label ? s.label : s);
                      }).join(' · ') + '</p>' : '') +
-                 (e.link ? '<a class="ix-src" href="' + esc(e.link) + '" target="_blank" rel="noopener">Source ↗</a>' : '') +
                '</div>' +
              '</details>';
     }
