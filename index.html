@@ -1004,17 +1004,18 @@
   </ul>
 </nav>
 <script>
-  /* The Index is a view, not a section you scroll past: the filter rail needs the
-     full height of the window, which it cannot have with the scorecard above it.
+  /* Each tab is a view, not a section you scroll past. The Index needs the full
+     height of the window for its filter rail, and the Alt Path is an argument in
+     its own right rather than the tail of the Primer, so it gets its own screen.
      Hash-driven, so existing links and bookmarks still land where they did. */
-  var VIEW_OF = { primer: 'overview', alternative: 'overview', scorecard: 'scorecard', index: 'movement' };
+  var VIEW_OF = { primer: 'overview', alternative: 'alternative', scorecard: 'scorecard', index: 'movement' };
   function setView(view, scrollTo) {
     document.querySelectorAll('[data-screen]').forEach(function (s) {
       s.classList.toggle('view-on', s.getAttribute('data-screen') === view);
     });
     document.querySelectorAll('#nav-links a').forEach(function (a) {
       var t = (a.getAttribute('href') || '').slice(1);
-      a.classList.toggle('active', view !== 'overview' && VIEW_OF[t] === view);
+      a.classList.toggle('active', VIEW_OF[t] === view);
     });
     if (scrollTo) {
       var el = document.getElementById(scrollTo);
@@ -1368,7 +1369,7 @@
 <!-- ╔══════════════════════════════╗ -->
 <!-- ║      THE MISSED MANDATE      ║ -->
 <!-- ╚══════════════════════════════╝ -->
-<section id="alternative" data-screen="overview" class="view-on">
+<section id="alternative" data-screen="alternative">
   <div class="inner">
     <p class="eyebrow teal-dim">A bipartisan mandate</p>
     <h2 class="section-h2 light">Reclaiming Health as a Democratic Cause</h2>
@@ -1629,7 +1630,7 @@
 
   var LABEL = {
     stance:   { advancing: 'Advancing health', opposing: 'Opposing health', neutral: 'Neutral / contested' },
-    level:    { federal: 'Federal policy', state: 'State policy', movement: 'Movement & media' },
+    level:    { federal: 'Federal', state: 'State', movement: 'Movement' },
     category: { policy: 'Policy', politics: 'Politics', media: 'Media', event: 'Event' },
     themes:   {
       pesticides: 'Pesticides & herbicides', toxics: 'Toxic chemicals & pollution',
