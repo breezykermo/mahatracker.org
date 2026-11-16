@@ -206,7 +206,7 @@
       if (opts.state && stateFilter && e.state !== stateFilter) return false;
       if (yearFilter && (e.date || '').slice(0, 4) !== yearFilter) return false;
       if (query) {
-        var hay = (e.title + ' ' + e.description + ' ' + (e.state || '') + ' ' +
+        var hay = (e.title + ' ' + e.descriptionText + ' ' + (e.state || '') + ' ' +
                    (e.tags || []).join(' ') + ' ' + e.dateLabel).toLowerCase();
         var terms = query.toLowerCase().split(/\s+/).filter(Boolean);
         for (var i = 0; i < terms.length; i++) if (hay.indexOf(terms[i]) === -1) return false;
@@ -231,27 +231,23 @@
                    (e.govParty ? ' · Gov. ' + esc(e.govParty) : '') + '</span>' : '') +
                  (e.themes || []).map(function (t) {
                    return '<span class="ix-tag theme">' + esc(label('themes', t)) + '</span>'; }).join('') +
-                 (e.tags || []).map(function (t) { return '<span class="ix-tag">' + esc(t) + '</span>'; }).join('');
+                 e.html.tags;
 
       return '<details class="ix-rec" data-stance="' + esc(e.stance) + '" id="' + esc(e.id) + '">' +
                '<summary>' +
                  '<span class="ix-rail-bar" aria-hidden="true"></span>' +
-                 '<span class="ix-date">' + esc(e.dateLabel) + '</span>' +
+                 '<span class="ix-date">' + e.html.dateLabel + '</span>' +
                  '<span class="ix-main">' +
-                   '<span class="ix-title">' + esc(e.title) + '</span>' +
+                   '<span class="ix-title">' + e.html.title + '</span>' +
                    '<span class="ix-meta">' + tags + '</span>' +
                    '<span class="ix-more">Read summary and sources</span>' +
                  '</span>' +
                  '<span class="ix-chev" aria-hidden="true">❯</span>' +
                '</summary>' +
                '<div class="ix-body">' +
-                 '<div class="ix-desc">' + e.description + '</div>' +
-                 (e.sources && e.sources.length
-                   ? '<p class="ix-sources"><span>Sources</span> ' + e.sources.map(function (s) {
-                       return (s && s.url)
-                         ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label || 'Source') + '</a>'
-                         : esc(s && s.label ? s.label : s);
-                     }).join(' · ') + '</p>' : '') +
+                 '<div class="ix-desc">' + e.html.description + '</div>' +
+                 (e.html.sources
+                   ? '<p class="ix-sources"><span>Sources</span> ' + e.html.sources + '</p>' : '') +
                '</div>' +
              '</details>';
     }
@@ -437,14 +433,23 @@
   var movementIx = createIndex(document.getElementById('movement-index'), { scope: 'movement', state: false, rail: true  });
 
   /* site.typ writes each record's fields as JSON into #entries-data, and
-     its description, rendered, into a hidden div under #entry-bodies. */
+     its title, date, description, sources and tags, rendered, into a hidden
+     div under #entry-bodies. */
   try {
     var data = JSON.parse(document.getElementById('entries-data').textContent);
-    var bodies = {};
+    var rendered = {};
     document.querySelectorAll('#entry-bodies > [data-id]').forEach(function (el) {
-      bodies[el.getAttribute('data-id')] = el.innerHTML;
+      var html = {};
+      el.querySelectorAll(':scope > [data-field]').forEach(function (f) {
+        html[f.getAttribute('data-field')] = f.innerHTML;
+      });
+      html.text = el.querySelector(':scope > [data-field="description"]').textContent;
+      rendered[el.getAttribute('data-id')] = html;
     });
-    data.forEach(function (e) { e.description = bodies[e.id] || ''; });
+    data.forEach(function (e) {
+      e.html = rendered[e.id];
+      e.descriptionText = e.html.text;
+    });
     // Sort here rather than trusting the file, so an entry added out of
     // order cannot surface in the wrong year. Array.sort is stable, so
     // entries sharing a date keep the order the file gives them.

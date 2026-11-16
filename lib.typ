@@ -15,6 +15,19 @@
 
 // ── Records ────────────────────────────────────────────────────────────
 
+// The words in a piece of content with the markup stripped, for checks and
+// for the search box.
+#let plain(c) = {
+  if c == none { "" }
+  else if type(c) == str { c }
+  else if c.has("text") { plain(c.text) }
+  else if c.has("children") { c.children.map(plain).sum(default: "") }
+  else if c.has("body") { plain(c.body) }
+  else if c.func() == smartquote { if c.double { "\"" } else { "'" } }
+  else if c == [ ] { " " }
+  else { "" }
+}
+
 // One source an entry draws on. Leave the url off only for something that
 // can be named but genuinely not linked; it then renders as plain text.
 #let source(label, ..url) = (label: label, url: url.pos().at(0, default: ""))
@@ -36,7 +49,7 @@
 //
 //   id          e042 - the letter e and three digits, never reused
 //   date        2026-11-08, 2026-11 or 2026, whatever the source supports
-//   dateLabel   what a reader sees, e.g. "Spring 2024"; the year must match
+//   dateLabel   what a reader sees, e.g. [Spring 2024]; the year must match
 //   dateApprox  true when the date is approximate
 //   title       clicking it on the site reveals the description
 //   category    policy, politics, media or event
@@ -44,12 +57,17 @@
 //   stance      advancing, opposing or neutral - enacted policy only
 //   themes      one or more of pesticides, toxics, food, foodaccess,
 //               healthcare, medication, vaccines, vectors, illness
-//   tags        free text; reuse an existing spelling where one fits
+//   tags        free text, e.g. ([Trump administration], [Sen. Booker]);
+//               reuse an existing spelling where one fits
 //   state       full name, e.g. "West Virginia" - state records only
 //   stateCode   two lowercase letters, e.g. "wv", agreeing with state
 //   govParty    "D" or "R" - state policy records only
 //   enacted, actorD, actorR, bipartisan
 //               true or false - policy records only
+//
+// title, dateLabel, tags and source labels are content in [ ], like the
+// description, so they take the same markup. The rest are fixed values the
+// filters and the scorecard match on, so they stay strings in " ".
 //
 // Then any number of source(...) lines, and the description in [ ].
 //
@@ -79,9 +97,13 @@
   assert(rest.named().len() == 0, message: who + ": unknown field(s) " + rest.named().keys().join(", "))
   let pos = rest.pos()
   assert(pos.len() > 0 and type(pos.last()) == content, message: who + ": no description in [ ] after the fields")
-  for (k, v) in (id: id, date: date, dateLabel: dateLabel, title: title) {
+  for (k, v) in (id: id, date: date) {
     assert(type(v) == str, message: who + ": missing " + k)
   }
+  for (k, v) in (title: title, dateLabel: dateLabel) {
+    assert(v != none and plain(v).trim() != "", message: who + ": missing " + k)
+  }
+  let tags = if type(tags) == array { tags } else { (tags,) }
   assert(date.match(regex("^\d{4}(-\d{2}(-\d{2})?)?$")) != none, message: who + ": date must be YYYY, YYYY-MM or YYYY-MM-DD")
   let allowed = (
     category: ("policy", "politics", "media", "event"),
@@ -97,8 +119,8 @@
     assert(t in THEMES, message: who + ": unknown theme " + t)
   }
   assert(id.match(regex("^e\d{3}$")) != none, message: who + ": id must be the letter e and three digits, e.g. e042")
-  let year = dateLabel.find(regex("\d{4}"))
-  assert(year == none or year == date.slice(0, 4), message: who + ": date " + date + " and dateLabel \"" + dateLabel + "\" disagree on the year")
+  let year = plain(dateLabel).find(regex("\d{4}"))
+  assert(year == none or year == date.slice(0, 4), message: who + ": date " + date + " and dateLabel \"" + plain(dateLabel) + "\" disagree on the year")
   assert(stateCode.match(regex("^([a-z]{2})?$")) != none, message: who + ": stateCode must be two lowercase letters, e.g. wv")
   // The two halves of the site: enacted policy is scored, everything else is not.
   if category == "policy" and level in ("federal", "state") {
@@ -112,31 +134,40 @@
   let sources = pos.slice(0, -1)
   for s in sources {
     assert(type(s) == dictionary, message: who + ": write each source as source(\"Label\", \"https://…\")")
-    assert(s.label != "", message: who + ": a source has no label")
+    assert(plain(s.label).trim() != "", message: who + ": a source has no label")
   }
 
+  // The fields as plain values: the JSON site.js reads, and what the checks
+  // and the search box see. The content fields go in as their bare text.
   let record = (
     id: id,
     date: date,
-    dateLabel: dateLabel,
+    dateLabel: plain(dateLabel),
     dateApprox: dateApprox,
-    title: title,
+    title: plain(title),
     category: category,
     level: level,
     stance: stance,
     themes: if type(themes) == str { (themes,) } else { themes },
-    tags: if type(tags) == str { (tags,) } else { tags },
+    tags: tags.map(plain),
     state: state,
     stateCode: stateCode,
     govParty: govParty,
-    sources: sources,
+    sources: sources.map(s => (label: plain(s.label), url: s.url)),
   )
   for (k, v) in (enacted: enacted, actorD: actorD, actorR: actorR, bipartisan: bipartisan) {
     if v != none { record.insert(k, v) }
   }
 
   [#metadata(record) <entry>]
-  el("div", data-id: id, pos.last())
+  // Rendered, for site.js to drop into the record's card.
+  el("div", data-id: id, {
+    el("div", data-field: "title", title)
+    el("div", data-field: "dateLabel", dateLabel)
+    el("div", data-field: "description", pos.last())
+    el("div", data-field: "sources", sources.map(s => if s.url != "" { link(s.url, s.label) } else { s.label }).join(" · "))
+    el("div", data-field: "tags", tags.map(t => el("span", class: "ix-tag", t)).join())
+  })
 }
 
 // ── Page furniture ─────────────────────────────────────────────────────
