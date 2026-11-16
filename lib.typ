@@ -96,9 +96,23 @@
   for t in (if type(themes) == str { (themes,) } else { themes }) {
     assert(t in THEMES, message: who + ": unknown theme " + t)
   }
+  assert(id.match(regex("^e\d{3}$")) != none, message: who + ": id must be the letter e and three digits, e.g. e042")
+  let year = dateLabel.find(regex("\d{4}"))
+  assert(year == none or year == date.slice(0, 4), message: who + ": date " + date + " and dateLabel \"" + dateLabel + "\" disagree on the year")
+  assert(stateCode.match(regex("^([a-z]{2})?$")) != none, message: who + ": stateCode must be two lowercase letters, e.g. wv")
+  // The two halves of the site: enacted policy is scored, everything else is not.
+  if category == "policy" and level in ("federal", "state") {
+    assert(stance != "", message: who + ": enacted policy with no stance on health")
+  } else {
+    assert(stance == "", message: who + ": not policy, but carries stance " + stance)
+    for (k, v) in (enacted: enacted, actorD: actorD, actorR: actorR, bipartisan: bipartisan) {
+      assert(v == none, message: who + ": not policy, but carries " + k)
+    }
+  }
   let sources = pos.slice(0, -1)
   for s in sources {
     assert(type(s) == dictionary, message: who + ": write each source as source(\"Label\", \"https://…\")")
+    assert(s.label != "", message: who + ": a source has no label")
   }
 
   let record = (
@@ -259,4 +273,40 @@
       el("div", class: "ix-out")
     })
   })
+}
+
+// ── Checks across all the records ──────────────────────────────────────
+
+// Mistakes that fail the build but need every record to see. site.typ calls
+// this on the full set.
+#let check-records(records) = {
+  let seen = (:)
+  for r in records {
+    assert(r.id not in seen, message: r.id + ": duplicate id")
+    seen.insert(r.id, true)
+  }
+}
+
+// Things worth a look that should not stop the site going up. Typst cannot
+// print a warning of its own, so `just check` prints this list instead.
+#let warnings(records) = {
+  let out = ()
+  let norm(s) = lower(s).replace(regex("[^a-z0-9 ]"), " ").replace(regex("\s+"), " ").trim()
+  let openings = (:)
+  let prev = none
+  for r in records {
+    if r.sources.len() == 0 { out.push(r.id + ": no sources") }
+    let unlinked = r.sources.filter(s => s.url == "").map(s => s.label)
+    if unlinked.len() > 0 { out.push(r.id + ": source named but not linked: " + unlinked.join(", ")) }
+    // A near-duplicate is how the five merged pairs got in.
+    let k = norm(r.title.clusters().slice(0, calc.min(46, r.title.clusters().len())).join())
+    openings.insert(k, openings.at(k, default: ()) + (r.id,))
+    // Newest first. site.js sorts anyway; this keeps the file readable.
+    if prev != none and r.date > prev { out.push(r.id + ": out of file order, " + r.date + " follows " + prev) }
+    prev = r.date
+  }
+  for (k, ids) in openings {
+    if ids.len() > 1 { out.push("possible duplicate: " + ids.join(", ") + " share a title opening") }
+  }
+  out
 }

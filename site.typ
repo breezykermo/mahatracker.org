@@ -64,8 +64,11 @@
     // into the script tag below as JSON; site.js joins the two by id and
     // renders both indexes and the scorecard from them.
     el("div", id: "entry-bodies", hidden: "", include "content/entries.typ")
-    context el("script", type: "application/json", id: "entries-data",
-      json.encode(query(<entry>).map(m => m.value), pretty: false))
+    context {
+      let records = query(<entry>).map(m => m.value)
+      check-records(records)
+      el("script", type: "application/json", id: "entries-data", json.encode(records, pretty: false))
+    }
 
     html.script(read("assets/site.js"))
   })
